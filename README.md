@@ -60,31 +60,31 @@ The last stages of this matrix are responsive layout, and CSS styles.
 
 #WIREFRAMES
 -Landing Page
-![LANDING PAGE](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/landing-page.jpg)
+![LANDING PAGE](https://github.com/DaFreeStyle/rotaflow/blob/master/images/landing-page.jpg)
 
 --LOG IN FORMS
-![LOG IN FORM FOR CURRENT USER](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/Log-In.jpg)
+![LOG IN FORM FOR CURRENT USER](https://github.com/DaFreeStyle/rotaflow/blob/master/images/Log-In.jpg)
 
 --NEW USER FORMS
-![NEW USER FORM](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/create-user.jpg)
+![NEW USER FORM](https://github.com/DaFreeStyle/rotaflow/blob/master/images/create-user.jpg)
 
 --GUEST USER FORM
-![GUEST LOG IN](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/guest%20user.jpg)
+![GUEST LOG IN](https://github.com/DaFreeStyle/rotaflow/blob/master/images/guest%20user.jpg)
 
 --ACCOUNT DASHBOARD
-![USER ACCOUNT OR DASHBOARD](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/dashboard.jpg)
+![USER ACCOUNT OR DASHBOARD](https://github.com/DaFreeStyle/rotaflow/blob/master/images/dashboard.jpg)
 
 --LIST
-![LIST](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/list.jpg)
+![LIST](https://github.com/DaFreeStyle/rotaflow/blob/master/images/list.jpg)
 
 --ADD FORM
-![ADD FORM](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/add-form.jpg)
+![ADD FORM](https://github.com/DaFreeStyle/rotaflow/blob/master/images/add-form.jpg)
 
 --EDIT FORM
-![EDIT FORM](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/edit-form.jpg)
+![EDIT FORM](https://github.com/DaFreeStyle/rotaflow/blob/master/images/edit-form.jpg)
 
 --FLOWCHART
-![FLOWCHART](https://git.generalassemb.ly/youngmaid/freestyle-rotaflow/blob/master/images/flow-chart.jpg)
+![FLOWCHART](https://github.com/DaFreeStyle/rotaflow/blob/master/images/flow-chart.jpg)
 
 #CHALLENGES
     Fetching the API's and utilizing the keys were very difficult. 
