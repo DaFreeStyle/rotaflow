@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/DaFreeStyle/rotaflow#readme",
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "pg-promise": "^6.8.0"
   }
 }
