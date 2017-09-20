@@ -52,10 +52,11 @@ The last stages of this matrix are responsive layout, and CSS styles.
 ##MVP 
 - Generate express/node servers as well as react. 
 - Build Controllers, Routes, and Models.
-- API Database/AXIOS.
+- API Database/AXIOS or AJAX
 
 ##POST-MVP
 - Bootstrap/Responsive Web Layout
+-CSS Animations
 - Deployment on Heroku
 
 #WIREFRAMES
@@ -108,6 +109,8 @@ Tasks
 #CODE SNIPPET
 
 ##ADDITIONAL LIBRARIES
+- Bootstrap
+- CSS Animations
 
 ##CHANGE LOGS
 
