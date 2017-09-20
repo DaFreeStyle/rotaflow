@@ -1,0 +1,23 @@
+{
+  "name": "rotaflow",
+  "version": "1.0.0",
+  "description": "This group project is created and by the Freesytle Squad:  Felipe Hernandez, Kitty Pelerin, and Rastko Sassic of GA.  The name of our App is RotaFlow.  Rota is Latin for wheel or a  form of rotation or roster call, an overview, list of duties, or  in this case, wish items. RotaFlow is a fun, user-friendly,  organization app, which facilitates your wishes easier.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaFreeStyle/rotaflow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaFreeStyle/rotaflow/issues"
+  },
+  "homepage": "https://github.com/DaFreeStyle/rotaflow#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
