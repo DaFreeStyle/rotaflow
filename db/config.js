@@ -10,7 +10,7 @@ let db;
 
 if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
   db = pgp({
-    database: 'rotaflow',
+    database: 'rotaflow_dev',
     port: 5432,
     host: 'localhost',
   });
