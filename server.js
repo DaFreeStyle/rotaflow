@@ -1,9 +1,9 @@
-// SET UP THE NPM CREW
+
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const cors = require('cors';)
+const cors = require('cors');
 const app = express();
 
 //SET UP PORT AND LISTEN
@@ -13,7 +13,7 @@ app.listen(PORT, function() {
 });
 
 //SET UP STATIC FILES
-app.use('/static', express.static(path.join(_dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // SET UP CORS
 app.use(cors());

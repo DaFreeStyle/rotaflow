@@ -29,10 +29,11 @@ rotaflowController.show = (req, res) => {
     });
 };
 
+/*
 rotaflowController.create = (req, res) => {
   Rotaflow.create({
-      tweed: req.body.rotaflow,
-      time: Date.now(),
+      ******************,
+      ******************,
     })
     .then(rotaflow => {
       res.json({message: 'ok', data: { rotaflow }});
@@ -41,6 +42,6 @@ rotaflowController.create = (req, res) => {
       console.log(err);
       res.status(400).json({message: '400', err});
     });
-};
+};  */
 
 module.exports = rotaflowController;

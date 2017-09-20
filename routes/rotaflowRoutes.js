@@ -5,6 +5,6 @@ const rotaflowRoutes = express.Router();
 
 rotaflowRoutes.get('/', rotaflowController.index);
 rotaflowRoutes.get('/:id', rotaflowController.show);
-rotaflowRoutes.post('/', rotaflowController.create);
+// rotaflowRoutes.post('/', rotaflowController.create);
 
 module.exports = rotaflowRoutes;
