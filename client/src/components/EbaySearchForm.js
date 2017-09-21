@@ -5,6 +5,10 @@ class EbaySearchForm extends Component {
     return(
       <div>
         <h1>Ebay Search Form</h1>
+        <form>
+          <input />
+          <button></button>
+        </form>
       </div>
 
     );
