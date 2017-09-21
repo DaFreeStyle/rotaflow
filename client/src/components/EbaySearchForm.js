@@ -13,7 +13,7 @@ class EbaySearchForm extends Component {
             type='text'
             value={this.props.inputSearchValue}
             placeholder='Enter your keywords'
-            onChange={this.porps.handleInputSearchOnChange}
+            onChange={this.props.handleInputSearchOnChange}
           />
           <button id='submit'>Search</button>
         </form>
