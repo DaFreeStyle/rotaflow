@@ -4,6 +4,25 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      inputSearchValue: '',
+    }
+  }
+
+  componentDidMount() {
+    axios('http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=chocolates&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1')
+      .then((res) => {
+        this.setState({
+          products: res,
+        }).catch((err) => {
+          console.log(err);
+        });
+      });
+  }
+
   render() {
     return (
       <div className="App">
