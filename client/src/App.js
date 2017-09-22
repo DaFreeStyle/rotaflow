@@ -6,7 +6,6 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import EbaySearchForm from './components/EbaySearchForm';
-import DisplayEbayProduct from './components/DisplayEbayProduct';
 
 class App extends Component {
   constructor(props) {
