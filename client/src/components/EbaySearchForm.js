@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DisplayEbayProduct from './DisplayEbayProduct';
 
 class EbaySearchForm extends Component {
   render() {
@@ -17,21 +18,9 @@ class EbaySearchForm extends Component {
           />
           <button id='submit'>Search</button>
         </form>
-        {this.props.data.map(product => {
+        {this.props.data.map((product) => {
           return (
-            <table>
-              <tbody>
-                <tr key={product.id}>
-                  <td>
-                    <img src={product.galleryURL} />
-                  </td>
-                  <td>
-                    <a href={product.viewItemURL} target='_blank'>{product.title}</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
+            <DisplayEbayProduct product={product} key={product.itemId[0]} />
           )
         })}
       </div>
