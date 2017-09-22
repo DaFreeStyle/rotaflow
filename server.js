@@ -7,13 +7,13 @@ const cors = require('cors');
 const app = express();
 
 //SET UP PORT AND LISTEN
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
   console.log(`listening on ${PORT}`);
 });
 
-//SET UP STATIC FILES
-app.use('/static', express.static(path.join(__dirname, 'public')));
+// THIS IS WHERE REACT WILL LIVE
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // SET UP CORS
 app.use(cors());
