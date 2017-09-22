@@ -15,9 +15,10 @@ class App extends Component {
       products: [],
       dbItems: [],
       inputSearchValue: '',
+      wantedItem: {},
 
     }
-    //this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
     //this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
@@ -31,6 +32,16 @@ class App extends Component {
         //console.log('didMount Products ',this.state.products);
     }).catch((err) => {
         console.log(err);
+    });
+
+  }
+
+  // method to add item
+  handleAddProduct(titleP, imgP, linkP) {
+    console.log('here', titleP, imgP, linkP);
+    var n = {title:titleP, imgurl:imgP, producturl:linkP}
+    this.setState({
+      wantedItem: n,
     });
 
   }
@@ -57,12 +68,15 @@ class App extends Component {
   // }
 
   render() {
+    console.log('setState ', this.state.wantedItem);
     return (
       <div className='App'>
         <Header />
         <main>
           <Switch>
-            <Route exact path='/searchForm' component={EbaySearchForm} />
+            <Route exact path='/searchForm'
+              render={(props) => <EbaySearchForm handleAddProduct={this.handleAddProduct} wantedItem={this.state.wantedItem}/> }
+            />
             <Route exact path='/displayProduct' component={DisplayEbayProduct} />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />

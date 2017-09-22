@@ -8,12 +8,11 @@ class EbaySearchForm extends Component {
     this.state = {
       products: [],
       inputSearchValue: '',
-      wanteditem: {},
+      // wanteditem: {},
 
     }
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
   handleInputSearchOnChange(event) {
@@ -39,18 +38,7 @@ class EbaySearchForm extends Component {
       });
   }
 
-  // method to add item
-  handleAddProduct(titleP, imgP, linkP) {
-    console.log('here', titleP, imgP, linkP);
-    var n = {title:titleP, imgurl:imgP, producturl:linkP}
-    this.setState({
-      wanteditem: n,
-    });
-
-  }
-
   render() {
-    //console.log('setState ', this.state.wanteditem);
     return(
       <div>
         <h1>Ebay Search Form</h1>
@@ -68,7 +56,7 @@ class EbaySearchForm extends Component {
         </form>
         {this.state.products.map((product) => {
           return (
-            <div key={product.itemId}>
+            <div key={product.itemId[0]}>
               <h2>Search results</h2>
               <table>
                 <tbody>
@@ -82,7 +70,7 @@ class EbaySearchForm extends Component {
                     <td>
                       <button
                         onClick={(titleP, imgP, linkP) => {
-                          this.handleAddProduct(
+                          this.props.handleAddProduct(
                             product.title[0],
                             product.galleryURL[0],
                             product.viewItemURL[0]
