@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 import EbaySearchForm from './components/EbaySearchForm';
+import DisplayEbayProduct from './components/DisplayEbayProduct';
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +58,13 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
+        <main>
+          <Switch>
+            <Route exact path='/searchForm' component={EbaySearchForm} />
+            <Route exact path='/displayProduct' component={DisplayEbayProduct} />
+            <Redirect to='/' />
+          </Switch>
+        </main>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
