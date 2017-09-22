@@ -57,30 +57,6 @@ rotaflowController.delete = (req, res) => {
     });
 }
 
-rotaflowController.update = (req, res) => {
-  Rotaflow.update({
-      title: req.body.title,
-      imgurl: req.body.imgurl,
-      producturl: req.body.producturl
-  }, req.params.id).then(data => {
 
-    res.redirect('/index'); //REDIRECTION?
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-};
-
-//DO I NEED getOne at all, it seems I do.
-rotaflowController.getOne = (req, res) => {
-  Rotaflow.findById(req.params.id)
-    .then(data => {
-      res.render('./rotas/edit', { data} ) /////////////ROUT?????
-    })
-    .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-}
 
 module.exports = rotaflowController;

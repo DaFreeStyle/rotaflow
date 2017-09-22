@@ -35,16 +35,6 @@ Rotaflow.destroy = (id) => {
   `, [id]);
 }
 
-Rotaflow.update = (product, id) => {
-  return db.one(
-    `
-    UPDATE products SET
-    title = $1,
-    imgurl = $2,
-    producturl = $3
 
-    RETURNING *
-  `, [product.title, product.imgurl, product.producturl, id]);
-}
 
 module.exports = Rotaflow;
