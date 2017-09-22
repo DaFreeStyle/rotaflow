@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       products: [],
       inputSearchValue: '',
+
     }
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -19,13 +20,15 @@ class App extends Component {
   componentDidMount() {
     axios('https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=chocolates&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1')
     .then((res) => {
-      console.log(res);
-        this.setState({
-          products: res,
+      console.log('didMount before setState ', res.data);
+        this.setState(prevState => {
+          return {products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
         })
-      }).catch((err) => {
-          console.log(err);
-      });
+        console.log('didMount Products ',this.state.products);
+    }).catch((err) => {
+        console.log(err);
+    });
+
   }
 
   handleInputSearchOnChange(event) {
@@ -40,9 +43,9 @@ class App extends Component {
     let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
     axios(url)
     .then((res) => {
-      console.log(res);
-        this.setState({
-          products: res,
+        this.setState(prevState => {
+          return {
+            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
         })
       }).catch((err) => {
           console.log(err);

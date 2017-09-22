@@ -17,6 +17,7 @@ class EbaySearchForm extends Component {
           />
           <button id='submit'>Search</button>
         </form>
+
       </div>
 
     );
