@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DisplayEbayProduct from './DisplayEbayProduct';
 
 class EbaySearchForm extends Component {
   constructor(props) {

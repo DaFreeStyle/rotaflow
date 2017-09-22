@@ -114,7 +114,6 @@ handleItemDelete(event) {
             <Route exact path='/searchForm'
               render={(props) => <EbaySearchForm handleAddProduct={this.handleAddProduct} wantedItem={this.state.wantedItem}/> }
             />
-            <Route exact path='/displayProduct' component={DisplayEbayProduct} />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />
           </Switch>
