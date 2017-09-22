@@ -22,7 +22,7 @@ class App extends Component {
     .then((res) => {
       console.log('didMount before setState ', res.data);
         this.setState(prevState => {
-          return {products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0],}
+          return {products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
         })
         console.log('didMount Products ',this.state.products);
     }).catch((err) => {
@@ -45,7 +45,7 @@ class App extends Component {
     .then((res) => {
         this.setState(prevState => {
           return {
-            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0],}
+            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
         })
       }).catch((err) => {
           console.log(err);
