@@ -62,7 +62,6 @@ class App extends Component {
           <Switch>
             <Route exact path='/searchForm' component={EbaySearchForm} />
             <Route exact path='/displayProduct' component={DisplayEbayProduct} />
-            <Redirect to='/' />
           </Switch>
         </main>
         <p className="App-intro">

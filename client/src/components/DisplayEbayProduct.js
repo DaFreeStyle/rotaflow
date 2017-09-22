@@ -11,7 +11,7 @@ class DisplayEbayProduct extends Component {
           <tbody>
             <tr>
               <td>
-                <img src={this.props.product.galleryURL} />
+                <img src={this.props.product.galleryURL} alt='Ebay product' />
               </td>
               <td>
                 <a href={this.props.product.viewItemURL} target='_blank'>{this.props.product.title}</a>
