@@ -28,7 +28,8 @@ class EbaySearchForm extends Component {
     .then((res) => {
         this.setState(prevState => {
           return {
-            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
+            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,
+          }
         })
       }).catch((err) => {
           console.log(err);
@@ -41,7 +42,7 @@ class EbaySearchForm extends Component {
         <h1>Ebay Search Form</h1>
         <form
           className='ebaySearch'
-          onSubmit={this.submitHandler}
+          onSubmit={this.handleSearchSubmit}
         >
           <input
             type='text'
