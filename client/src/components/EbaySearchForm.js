@@ -8,10 +8,12 @@ class EbaySearchForm extends Component {
     this.state = {
       products: [],
       inputSearchValue: '',
+      wanteditem: {},
 
     }
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
   handleInputSearchOnChange(event) {
@@ -23,7 +25,7 @@ class EbaySearchForm extends Component {
   handleSearchSubmit(event) {
     event.preventDefault();
     let keywords = encodeURI(this.state.inputSearchValue);
-    let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=10';
+    let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
     axios(url)
     .then((res) => {
         this.setState(prevState => {
@@ -37,7 +39,18 @@ class EbaySearchForm extends Component {
       });
   }
 
+  // method to add item
+  handleAddProduct(titleP, imgP, linkP) {
+    console.log('here', titleP, imgP, linkP);
+    var n = {title:titleP, imgurl:imgP, producturl:linkP}
+    this.setState({
+      wanteditem: n,
+    });
+
+  }
+
   render() {
+    //console.log('setState ', this.state.wanteditem);
     return(
       <div>
         <h1>Ebay Search Form</h1>
@@ -55,7 +68,7 @@ class EbaySearchForm extends Component {
         </form>
         {this.state.products.map((product) => {
           return (
-            <div>
+            <div key={product.itemId}>
               <h2>Search results</h2>
               <table>
                 <tbody>
@@ -65,6 +78,17 @@ class EbaySearchForm extends Component {
                     </td>
                     <td>
                       <a href={product.viewItemURL} target='_blank'>{product.title}</a>
+                    </td>
+                    <td>
+                      <button
+                        onClick={(titleP, imgP, linkP) => {
+                          this.handleAddProduct(
+                            product.title[0],
+                            product.galleryURL[0],
+                            product.viewItemURL[0]
+                            )}
+                        }
+                      >add</button>
                     </td>
                   </tr>
                 </tbody>
