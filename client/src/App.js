@@ -66,6 +66,7 @@ class App extends Component {
           submitHandler={this.handleSearchSubmit}
           handleInputSearchOnChange={this.handleInputSearchOnChange}
           inputSearchValue={this.state.inputSearchValue}
+          data={this.state.products}
         />
       </div>
     );
