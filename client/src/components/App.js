@@ -81,7 +81,6 @@ handleItemDelete(event) {
     this.setState({
       wantedItem: n,
     });
-
   }
 
   // handleInputSearchOnChange(event) {
@@ -106,7 +105,7 @@ handleItemDelete(event) {
   // }
 
   render() {
-    console.log('setState ', this.state.wantedItem);
+    console.log('setState', this.state.wantedItem);
     return (
       <div className='App'>
         <Header />

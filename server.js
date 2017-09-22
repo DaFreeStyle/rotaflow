@@ -8,9 +8,6 @@ const app = express();
 
 //SET UP PORT AND LISTEN
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, function() {
-  console.log(`listening on ${PORT}`);
-});
 
 // THIS IS WHERE REACT WILL LIVE
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -28,10 +25,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 // SETTING ROUTES
 //============== INDEX ROUTE ============
 
-app.get('/', function(req,res) {
-  res.sendFile(_dirname + 'client/index.html');
-});
-
 //rotaflow API route
 const rotaflowRoutes = require('./routes/rotaflowRoutes');
 app.use('/api/rotas', rotaflowRoutes);
@@ -41,6 +34,10 @@ app.get('*', function(req, res) {
   res.status(404).send({message: 'Opps! Not found.'})
 });
 
+app.listen(PORT, function() {
+  debugger;
+  console.log(`listening on ${PORT}`);
+});
 
 
 
