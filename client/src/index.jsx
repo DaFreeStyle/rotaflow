@@ -1,9 +1,9 @@
-import React from 'react';
+import 'babel-regenerator-runtime';
+import React    from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import App      from './components/App';
 import { BrowserRouter as Router } from 'react-router-dom';
+import './index.css';
 
 ReactDOM.render(
   <Router>
@@ -11,5 +11,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
-
-registerServiceWorker();

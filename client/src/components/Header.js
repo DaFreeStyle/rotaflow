@@ -1,13 +1,12 @@
 import React from 'react';
-import '../App.css';
-import logo from '../logo.svg';
+import './App.css';
 import { Link } from 'react-router-dom';
 
 const Header = (prop) => {
   return(
     <div className="App">
       <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img className="App-logo" alt="logo" />
         <h2>Welcome to RotaFlow</h2>
         <nav>
           <ul>

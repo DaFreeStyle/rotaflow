@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { Component }        from 'react';
+import axios                       from 'axios';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import Header from './components/Header';
-import Home from './components/Home';
-import EbaySearchForm from './components/EbaySearchForm';
+import Header         from './Header';
+import Home           from './Home';
+import EbaySearchForm from './EbaySearchForm';
+
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -80,7 +81,6 @@ handleItemDelete(event) {
     this.setState({
       wantedItem: n,
     });
-
   }
 
   // handleInputSearchOnChange(event) {
@@ -105,7 +105,7 @@ handleItemDelete(event) {
   // }
 
   render() {
-    console.log('setState ', this.state.wantedItem);
+    console.log('setState', this.state.wantedItem);
     return (
       <div className='App'>
         <Header />

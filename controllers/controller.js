@@ -29,18 +29,34 @@ rotaflowController.show = (req, res) => {
     });
 };
 
+
 rotaflowController.create = (req, res) => {
   Rotaflow.create({
-      tweed: req.body.rotaflow,
-      time: Date.now(),
+      title: req.body.title,
+      imgurl: req.body.imgurl,
+      producturl: req.body.producturl
     })
-    .then(rotaflow => {
-      res.json({message: 'ok', data: { rotaflow }});
+    .then(data => {
+      res.json({message: 'ok', data: { data }});
     })
     .catch(err => {
       console.log(err);
       res.status(400).json({message: '400', err});
     });
 };
+
+rotaflowController.delete = (req, res) => {
+  Rotaflow.destroy(req.params.id)
+    .then(() => {
+      res.json({
+        message: 'Item deleted successfully!',
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+}
+
+
 
 module.exports = rotaflowController;
