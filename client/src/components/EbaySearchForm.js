@@ -31,6 +31,7 @@ class EbaySearchForm extends Component {
             products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,
           }
         })
+        console.log(this.state.products);
       }).catch((err) => {
           console.log(err);
       });
@@ -54,9 +55,23 @@ class EbaySearchForm extends Component {
         </form>
         {this.state.products.map((product) => {
           return (
-            <DisplayEbayProduct product={product} key={product.itemId[0]} />
-          )
-        })}
+            <div>
+              <h2>Search results</h2>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src={product.galleryURL} alt='Ebay product' />
+                    </td>
+                    <td>
+                      <a href={product.viewItemURL} target='_blank'>{product.title}</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )})
+        }
       </div>
 
     );
