@@ -61,7 +61,14 @@ class App extends Component {
         <Header />
         <main>
           <Switch>
-            <Route exact path='/searchForm' component={EbaySearchForm} />
+            <Route
+              exact path='/searchForm'
+              component={EbaySearchForm}
+              submitHandler={this.handleSearchSubmit}
+              handleInputSearchOnChange={this.handleInputSearchOnChange}
+              inputSearchValue={this.state.inputSearchValue}
+              data={this.state.products}
+            />
             <Route exact path='/displayProduct' component={DisplayEbayProduct} />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />
@@ -70,12 +77,6 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <EbaySearchForm
-          submitHandler={this.handleSearchSubmit}
-          handleInputSearchOnChange={this.handleInputSearchOnChange}
-          inputSearchValue={this.state.inputSearchValue}
-          data={this.state.products}
-        />
       </div>
     );
   }
