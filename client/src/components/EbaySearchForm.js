@@ -7,7 +7,7 @@ class EbaySearchForm extends Component {
     this.state = {
       products: [],
       inputSearchValue: '',
-      // wanteditem: {},
+      wantedItem: {},
 
     }
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);

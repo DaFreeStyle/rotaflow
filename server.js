@@ -35,7 +35,7 @@ app.get('*', function(req, res) {
 });
 
 app.listen(PORT, function() {
-  debugger;
+  //debugger;
   console.log(`listening on ${PORT}`);
 });
 
