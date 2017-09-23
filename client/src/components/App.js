@@ -35,7 +35,7 @@ class App extends Component {
         console.log(err);
     });
 
-    axios('http://localhost:3001/api/rotas')
+    axios('http://localhost:3000/api/rotas')
       .then(res => {
         this.setState(prevState => {
           return {
@@ -48,13 +48,13 @@ class App extends Component {
 
 handleItemAdding(event) {
   event.preventDefault();
-  axios.post('http://localhost:3001/api/rotas', {
-    title: this.state.wanteditem.title,
-    imgurl: this.state.wanteditem.imgurl,
-    producturl: this.state.wanteditem.producturl
+  axios.post('http://localhost:3000/api/rotas', {
+    title: this.state.wantedItem.title,
+    imgurl: this.state.wantedItem.imgurl,
+    producturl: this.state.wantedItem.producturl
   })
   .then(res => {
-    var newItem=this.state.wanteditem;
+    var newItem=this.state.wantedItem;
     this.setState((prevState) => {
       return {
         dbItems: prevState.dbItems.concat(newItem),
@@ -67,7 +67,7 @@ handleItemAdding(event) {
 handleItemDelete(event) {
   var id=90;
   event.preventDefault();
-  axios.delete(`http://localhost:3001/api/rotas/${id}`).then((res) => {
+  axios.delete(`http://localhost:3000/api/rotas/${id}`).then((res) => {
   console.log(res)
   //udate state5
   this.setState({dbItems: this.state.dbItems})
