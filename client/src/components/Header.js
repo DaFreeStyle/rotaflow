@@ -11,6 +11,7 @@ const Header = (prop) => {
         <nav>
           <ul>
             <li><Link to='/searchForm'>Search Form</Link></li>
+            <li><Link to='/whishlist'>Your Wishlist</Link></li>
           </ul>
         </nav>
       </div>

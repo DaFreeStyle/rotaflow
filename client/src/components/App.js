@@ -106,15 +106,17 @@ handleItemDelete(event) {
   // }
 
   render() {
-    console.log('setState', this.state.dbItems);
+    //console.log('setState', this.state.dbItems);
     return (
       <div className='App'>
         <Header />
-        <WishList data={this.state.dbItems} />
         <main>
           <Switch>
             <Route exact path='/searchForm'
               render={(props) => <EbaySearchForm handleAddProduct={this.handleAddProduct} wantedItem={this.state.wantedItem}/> }
+            />
+            <Route exact path='/whishlist'
+              render={(props) => <WishList data={this.state.dbItems} />}
             />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />
