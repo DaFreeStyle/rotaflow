@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 class Home extends Component {
   render() {
     return (
-      <h1>Welcome to RotaFlow</h1>
-    )
+      <div id="home-container">
+        <h1>Welcome to RotaFlow</h1>
+      </div>
+    );
   }
 }
 

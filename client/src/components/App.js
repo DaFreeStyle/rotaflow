@@ -108,7 +108,7 @@ handleItemDelete(event) {
     console.log('setState', this.state.wantedItem);
     return (
       <div className='App'>
-        <Header />
+        <Header/>
         <main>
           <Switch>
             <Route exact path='/searchForm'
