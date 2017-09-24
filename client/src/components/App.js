@@ -18,7 +18,7 @@ class App extends Component {
                dbItems: [],
       inputSearchValue: '',
             wantedItem: {},
-            isViewItem: false,
+            isViewItem: null,
             singleItem: {},
 
     }
@@ -28,7 +28,6 @@ class App extends Component {
     this.handleItemAdding          = this.handleItemAdding.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
     this.handleViewItem            = this.handleViewItem.bind(this);
-    this.test                      = this.test.bind(this);
   }
 
   componentDidMount() {
@@ -39,10 +38,11 @@ class App extends Component {
         this.setState(prevState => {
           return {
             dbItems: res.data.data.rotaflows,
+            isViewItem: false,
+            singleItem: res,
           }
       });
     });
-
   }
 
   handleInputSearchOnChange(event) {
@@ -118,34 +118,26 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
-  test() {
-
-    const test = this.state.isViewItem;
-    console.log(test);
-    console.log(this.state.singleItem);
-    if (test) {
+  handleViewItem(id) {
+    var item=id;
+   // event.preventDefault();
+   //let self = this;
+    axios.get(`http://localhost:3000/api/rotas/${item}`)
+    .then((res) => {
+      console.log('handleViewItem', res);
+      this.setState({
+          isViewItem: true,
+          singleItem: res.data,
+        })
+    }).catch(err => console.log(err));
+    console.log('isViewItem in handleViewItem ', this.state.isViewItem);
+    if (this.state.isViewItem) {
       return <ViewSingleItem />
     }
   }
 
-  handleViewItem(id) {
-    var item=id;
-   // event.preventDefault();
-   let self = this;
-    axios.get(`http://localhost:3000/api/rotas/${item}`)
-    .then((res) => {
-      console.log('handleViewItem', res);
-      self.setState((prevState) => {
-        return({
-          isViewItem: true,
-          singleItem: res.data.data,
-        }, this.test())
-      })
-    }).catch(err => console.log(err));
-  }
-
   render() {
-    console.log('setState', this.state.dbItems);
+    console.log('singleItem in Render ' , this.state.singleItem);
     return (
       <div className='App'>
         <Header />
