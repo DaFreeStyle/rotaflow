@@ -12,7 +12,9 @@ class WishItem extends Component {
             <a href={this.props.product.producturl} target='_blank'>{this.props.product.title}</a>
           </td>
           <td>
-            <button>View item</button>
+            <button
+              onClick={(id) => {this.props.handleViewItem(this.props.product.id)}}
+            >View item</button>
           </td>
           <td>
             <button>Delete</button>

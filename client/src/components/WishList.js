@@ -10,7 +10,11 @@ class WishList extends Component {
             <table>
               {this.props.data.map((product) => {
                 return(
-                  <WishItem product={product} key={product.id}/>
+                  <WishItem
+                    product={product}
+                    key={product.id}
+                    handleViewItem={this.props.handleViewItem}
+                  />
                 )})
               }
             </table>

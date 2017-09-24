@@ -6,6 +6,7 @@ import Header         from './Header';
 import Home           from './Home';
 import EbaySearchForm from './EbaySearchForm';
 import WishList       from './WishList';
+import ViewSingleItem from './ViewSingleItem';
 
 import './App.css';
 
@@ -17,6 +18,8 @@ class App extends Component {
                dbItems: [],
       inputSearchValue: '',
             wantedItem: {},
+            isViewItem: false,
+            singleItem: {},
 
     }
     this.handleSearchSubmit        = this.handleSearchSubmit.bind(this);
@@ -24,6 +27,8 @@ class App extends Component {
     this.handleAddProduct          = this.handleAddProduct.bind(this);
     this.handleItemAdding          = this.handleItemAdding.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
+    this.handleViewItem            = this.handleViewItem.bind(this);
+    this.test                      = this.test.bind(this);
   }
 
   componentDidMount() {
@@ -113,6 +118,32 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
+  test() {
+
+    const test = this.state.isViewItem;
+    console.log(test);
+    console.log(this.state.singleItem);
+    if (test) {
+      return <ViewSingleItem />
+    }
+  }
+
+  handleViewItem(id) {
+    var item=id;
+   // event.preventDefault();
+   let self = this;
+    axios.get(`http://localhost:3000/api/rotas/${item}`)
+    .then((res) => {
+      console.log('handleViewItem', res);
+      self.setState((prevState) => {
+        return({
+          isViewItem: true,
+          singleItem: res.data.data,
+        }, this.test())
+      })
+    }).catch(err => console.log(err));
+  }
+
   render() {
     console.log('setState', this.state.dbItems);
     return (
@@ -130,7 +161,10 @@ class App extends Component {
                                     wantedItem={this.state.wantedItem}/> }
             />
             <Route exact path='/whishlist'
-              render={(props) => <WishList data={this.state.dbItems} />}
+              render={(props) => <WishList
+                                    data={this.state.dbItems}
+                                    handleViewItem={this.handleViewItem}
+                                  />}
             />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />
