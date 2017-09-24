@@ -82,6 +82,19 @@ handleItemDelete(event) {
     this.setState({
       wantedItem: n,
     });
+    let self = this;
+    axios.post('http://localhost:3000/api/rotas', {
+      title: n.title,
+      imgurl: n.imgurl,
+      producturl: n.producturl,
+    }).then(res => {
+      var newItem = self.state.wantedItem;
+      self.setState((prevState) => {
+        return {
+          dbItems: prevState.dbItems.concat(newItem),
+        }
+      })
+    }).catch(err => console.log(err));
   }
 
   // handleInputSearchOnChange(event) {
