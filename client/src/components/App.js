@@ -113,27 +113,6 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
-  // handleInputSearchOnChange(event) {
-  //   this.setState({
-  //     inputSearchValue: event.target.value,
-  //   });
-  // }
-
-  // handleSearchSubmit(event) {
-  //   event.preventDefault();
-  //   let keywords = encodeURI(this.state.inputSearchValue);
-  //   let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
-  //   axios(url)
-  //   .then((res) => {
-  //       this.setState(prevState => {
-  //         return {
-  //           products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
-  //       })
-  //     }).catch((err) => {
-  //         console.log(err);
-  //     });
-  // }
-
   render() {
     console.log('setState', this.state.dbItems);
     return (
@@ -149,7 +128,6 @@ class App extends Component {
                                     handleInputSearchOnChange={this.handleInputSearchOnChange}
                                     inputSearchValue={this.state.inputSearchValue}
                                     wantedItem={this.state.wantedItem}/> }
-
             />
             <Route exact path='/whishlist'
               render={(props) => <WishList data={this.state.dbItems} />}
