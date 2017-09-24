@@ -5,7 +5,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Header         from './Header';
 import Home           from './Home';
 import EbaySearchForm from './EbaySearchForm';
-import WishList      from './WishList';
+import WishList       from './WishList';
 
 import './App.css';
 
@@ -106,7 +106,7 @@ handleItemDelete(event) {
   // }
 
   render() {
-    //console.log('setState', this.state.dbItems);
+    console.log('setState', this.state.dbItems);
     return (
       <div className='App'>
         <Header />
