@@ -1,25 +1,29 @@
+
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import rotowheel from '../img/rotowheel.png';
+import rotalogo from '../img/rotalogo.png';
 
 
-class Header extends Component {
-render() {
-const logopic = require('./img/rotowheel.png');
-const Header =(prop) => {
-  return (
-    <div id="header-container">
-      <img src={logopic} />
-
-
-        <h2 id="color"> Welcome to RotaFlow</h2>
+const Header = (prop) => {
+  return(
+    <div className="App">
+      <div className="App-header">
+        <img src={rotowheel} id="rotowheel" alt="pic"/>
+        <img src={rotalogo} id="rotalogo" alt="logo"/>
+        <h1 id="header-title">Your fun, customizable wishlist For shopping or registries</h1>
         <nav>
-          <ul>
-            <li><Link to='/searchForm'>Search Form</Link></li>
+          <ul className="nav-menu" >
+            <li><Link to='/'><h2>Home</h2></Link></li>
+            <li><Link to='/searchForm'><h2>Search Products</h2></Link></li>
+            <li><Link to='/whishlist'><h2>Your Wishlist</h2></Link></li>
+            <li><Link to='/about'><h2>About</h2></Link></li>
           </ul>
         </nav>
       </div>
-      )
-     };
+    </div>
+  );
+}
 
 export default Header;

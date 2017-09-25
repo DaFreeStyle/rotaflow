@@ -5,6 +5,10 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Header         from './Header';
 import Home           from './Home';
 import EbaySearchForm from './EbaySearchForm';
+import WishList       from './WishList';
+import ViewSingleItem from './ViewSingleItem';
+import Footer         from './Footer';
+import About          from './About';
 
 import './App.css';
 
@@ -12,29 +16,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
-      dbItems: [],
+              products: [],
+               dbItems: [],
       inputSearchValue: '',
-      wantedItem: {},
+            wantedItem: {},
+            isViewItem: false,
+            singleItem: {},
 
     }
-    this.handleAddProduct = this.handleAddProduct.bind(this);
-    this.handleItemAdding = this.handleItemAdding.bind(this);
-    this.handleItemDelete = this.handleItemDelete.bind(this);
+    this.handleSearchSubmit        = this.handleSearchSubmit.bind(this);
+    this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
+    this.handleAddProduct          = this.handleAddProduct.bind(this);
+    //this.handleItemAdding          = this.handleItemAdding.bind(this);
+    this.handleItemDelete          = this.handleItemDelete.bind(this);
+    this.handleViewItem            = this.handleViewItem.bind(this);
+    this.handleItemDelete          = this.handleItemDelete.bind(this);
+    this.handleItemEdit            = this.handleItemEdit.bind(this);
   }
 
   componentDidMount() {
-    axios('https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=chocolates&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1')
-    .then((res) => {
-      // console.log('didMount before setState ', res.data);
-        this.setState(prevState => {
-          return {products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
-        })
-        //console.log('didMount Products ',this.state.products);
-    }).catch((err) => {
-        console.log(err);
-    });
-
     axios('http://localhost:3000/api/rotas')
       .then(res => {
         this.setState(prevState => {
@@ -43,36 +43,64 @@ class App extends Component {
           }
       });
     });
-
   }
 
-handleItemAdding(event) {
-  event.preventDefault();
-  axios.post('http://localhost:3000/api/rotas', {
-    title: this.state.wanteditem.title,
-    imgurl: this.state.wanteditem.imgurl,
-    producturl: this.state.wanteditem.producturl
-  })
-  .then(res => {
-    var newItem=this.state.wanteditem;
-    this.setState((prevState) => {
-      return {
-        dbItems: prevState.dbItems.concat(newItem),
-      }
-    })
-  }).catch(err => console.log(err));
-    console.log(this.state.dbItems)
- };
+  handleInputSearchOnChange(event) {
+    this.setState({
+      inputSearchValue: event.target.value,
+    });
+  }
 
-handleItemDelete(event) {
-  var id=90;
-  event.preventDefault();
-  axios.delete(`http://localhost:3000/api/rotas/${id}`).then((res) => {
-  console.log(res)
-  //udate state5
-  this.setState({dbItems: this.state.dbItems})
-  })
-}
+  handleSearchSubmit(event) {
+    event.preventDefault();
+    let keywords = encodeURI(this.state.inputSearchValue);
+    let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
+    axios(url)
+    .then((res) => {
+        this.setState(prevState => {
+          return {
+            products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,
+          }
+        })
+        //console.log(this.state.products);
+      }).catch((err) => {
+          console.log(err);
+      });
+  }
+
+  // handleItemAdding(event) {
+  //   axios.post('http://localhost:3000/api/rotas', {
+  //     title: this.state.wantedItem.title,
+  //     imgurl: this.state.wantedItem.imgurl,
+  //     producturl: this.state.wantedItem.producturl
+  //   })
+  //   .then(res => {
+  //     var newItem=this.state.wantedItem;
+  //     this.setState((prevState) => {
+  //       return {
+  //         dbItems: prevState.dbItems.concat(newItem),
+  //       }
+  //     })
+  //   }).catch(err => console.log(err));
+  //     console.log(this.state.dbItems)
+  //  };
+
+  handleItemDelete(id) {
+    axios.delete(`http://localhost:3000/api/rotas/${id}`)
+    .then((res) => {
+      let dbItems=this.state.dbItems;
+      let newDbItems=[];
+      dbItems.forEach((item) => {
+        if (item.id !== id){
+        newDbItems.push(item)
+        }})
+      this.setState((prevState) => {
+        return{
+          dbItems: newDbItems,
+        }
+      });
+    }).catch(err => console.log(err));
+  }
 
   // method to add item
   handleAddProduct(titleP, imgP, linkP) {
@@ -81,45 +109,88 @@ handleItemDelete(event) {
     this.setState({
       wantedItem: n,
     });
+    let self = this;
+    axios.post('http://localhost:3000/api/rotas', {
+      title: n.title,
+      imgurl: n.imgurl,
+      producturl: n.producturl,
+    }).then(res => {
+      var newItem = self.state.wantedItem;
+      self.setState((prevState) => {
+        return {
+          dbItems: prevState.dbItems.concat(newItem),
+        }
+      })
+    }).catch(err => console.log(err));
   }
 
-  // handleInputSearchOnChange(event) {
-  //   this.setState({
-  //     inputSearchValue: event.target.value,
-  //   });
-  // }
+  handleViewItem(id) {
+    const item = this.state.dbItems.filter((item) => {
+      var viewItem = item.id;
+      return (viewItem === id);
+    });
+    this.setState({
+      isViewItem: true,
+      singleItem: item,
+    })
+  }
 
-  // handleSearchSubmit(event) {
-  //   event.preventDefault();
-  //   let keywords = encodeURI(this.state.inputSearchValue);
-  //   let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
-  //   axios(url)
-  //   .then((res) => {
-  //       this.setState(prevState => {
-  //         return {
-  //           products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,}
-  //       })
-  //     }).catch((err) => {
-  //         console.log(err);
-  //     });
-  // }
+  handleItemEdit(id) {
+    axios.post(`http://localhost:3000/api/rotas/${id}`)
+    .then((res) => {
+      console.log(res)
+      //udate state5
+      this.setState((prevState) => {
+        return{
+          dbItems: this.state.dbItems
+        }
+      });
+    }).catch(err => console.log(err));
+  }
 
   render() {
-    console.log('setState', this.state.wantedItem);
-    return (
-      <div className='App'>
-        <Header/>
-        <main>
-          <Switch>
-            <Route exact path='/searchForm'
-              render={(props) => <EbaySearchForm handleAddProduct={this.handleAddProduct} wantedItem={this.state.wantedItem}/> }
-            />
-            <Route exact path='/' component={Home} />
-            <Redirect to='/' />
-          </Switch>
-        </main>
-      </div>
-    );
+    console.log('singleItem in Render ' , this.state.singleItem);
+    console.log('dbItems after delete ' , this.state.dbItems);
+    if(this.state.isViewItem){
+      return(
+        <div>
+          <Header />
+          <ViewSingleItem handleItemDelete={this.handleItemDelete} item={this.state.singleItem} />
+          <Footer />
+        </div>
+      )
+    }else{
+      return (
+        <div className='App'>
+          <Header />
+          <main className='center'>
+            <Switch>
+              <Route exact path='/searchform'
+                render={(props) => <EbaySearchForm
+                                      handleAddProduct={this.handleAddProduct}
+                                      handleSearchSubmit={this.handleSearchSubmit}
+                                      products={this.state.products}
+                                      handleInputSearchOnChange={this.handleInputSearchOnChange}
+                                      inputSearchValue={this.state.inputSearchValue}
+                                      wantedItem={this.state.wantedItem}/> }
+              />
+              <Route exact path='/wishlist'
+                render={(props) => <WishList
+                                      data={this.state.dbItems}
+                                      handleViewItem={this.handleViewItem}
+                                      handleItemDelete={this.handleItemDelete}
+                                      handleItemEdit={this.handleItemEdit}
+                                    />}
+              />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/' component={Home} />
+              <Redirect to='/' />
+            </Switch>
+          </main>
+          <Footer />
+        </div>
+      );
+    };
   }
 }
 
