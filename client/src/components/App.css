@@ -1,6 +1,7 @@
 nav {
   display: inline-block;
-  margin-left: 50%;
+  position: relative;
+  left: 40%;
 }
 nav ul {
   list-style: none;
