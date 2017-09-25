@@ -20,17 +20,18 @@ class App extends Component {
                dbItems: [],
       inputSearchValue: '',
             wantedItem: {},
-            isViewItem: null,
+            isViewItem: false,
             singleItem: {},
 
     }
     this.handleSearchSubmit        = this.handleSearchSubmit.bind(this);
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
     this.handleAddProduct          = this.handleAddProduct.bind(this);
-    this.handleItemAdding          = this.handleItemAdding.bind(this);
+    //this.handleItemAdding          = this.handleItemAdding.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
     this.handleViewItem            = this.handleViewItem.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
+    this.handleItemEdit            = this.handleItemEdit.bind(this);
   }
 
   componentDidMount() {
@@ -67,33 +68,35 @@ class App extends Component {
       });
   }
 
-  handleItemAdding(event) {
-    event.preventDefault();
-    axios.post('http://localhost:3000/api/rotas', {
-      title: this.state.wantedItem.title,
-      imgurl: this.state.wantedItem.imgurl,
-      producturl: this.state.wantedItem.producturl
-    })
-    .then(res => {
-      var newItem=this.state.wantedItem;
-      this.setState((prevState) => {
-        return {
-          dbItems: prevState.dbItems.concat(newItem),
-        }
-      })
-    }).catch(err => console.log(err));
-      console.log(this.state.dbItems)
-   };
+  // handleItemAdding(event) {
+  //   axios.post('http://localhost:3000/api/rotas', {
+  //     title: this.state.wantedItem.title,
+  //     imgurl: this.state.wantedItem.imgurl,
+  //     producturl: this.state.wantedItem.producturl
+  //   })
+  //   .then(res => {
+  //     var newItem=this.state.wantedItem;
+  //     this.setState((prevState) => {
+  //       return {
+  //         dbItems: prevState.dbItems.concat(newItem),
+  //       }
+  //     })
+  //   }).catch(err => console.log(err));
+  //     console.log(this.state.dbItems)
+  //  };
 
   handleItemDelete(id) {
-    event.preventDefault();
     axios.delete(`http://localhost:3000/api/rotas/${id}`)
     .then((res) => {
-      console.log(res)
-      //udate state5
+      let dbItems=this.state.dbItems;
+      let newDbItems=[];
+      dbItems.forEach((item) => {
+        if (item.id !== id){
+        newDbItems.push(item)
+        }})
       this.setState((prevState) => {
         return{
-          dbItems: this.state.dbItems
+          dbItems: newDbItems,
         }
       });
     }).catch(err => console.log(err));
@@ -122,21 +125,14 @@ class App extends Component {
   }
 
   handleViewItem(id) {
-    var item=id;
-   // event.preventDefault();
-   //let self = this;
-    axios.get(`http://localhost:3000/api/rotas/${item}`)
-    .then((res) => {
-      console.log('handleViewItem', res);
-      this.setState({
-          isViewItem: true,
-          singleItem: res.data.data.rotaflow,
-        })
-    }).catch(err => console.log(err));
-    console.log('isViewItem in handleViewItem ', this.state.isViewItem);
-    if (this.state.isViewItem) {
-      return <ViewSingleItem />
-    }
+    const item = this.state.dbItems.filter((item) => {
+      var viewItem = item.id;
+      return (viewItem === id);
+    });
+    this.setState({
+      isViewItem: true,
+      singleItem: item,
+    })
   }
 
   handleItemEdit(id) {
@@ -154,36 +150,47 @@ class App extends Component {
 
   render() {
     console.log('singleItem in Render ' , this.state.singleItem);
-    return (
-      <div className='App'>
-        <Header />
-        <main className='center'>
-          <Switch>
-            <Route exact path='/searchForm'
-              render={(props) => <EbaySearchForm
-                                    handleAddProduct={this.handleAddProduct}
-                                    handleSearchSubmit={this.handleSearchSubmit}
-                                    products={this.state.products}
-                                    handleInputSearchOnChange={this.handleInputSearchOnChange}
-                                    inputSearchValue={this.state.inputSearchValue}
-                                    wantedItem={this.state.wantedItem}/> }
-            />
-            <Route exact path='/whishlist'
-              render={(props) => <WishList
-                                    data={this.state.dbItems}
-                                    handleViewItem={this.handleViewItem}
-                                    handleItemDelete={this.handleItemDelete}
-                                    handleItemEdit={this.handleItemEdit}
-                                  />}
-            />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/' component={Home} />
-            <Redirect to='/' />
-          </Switch>
-        </main>
-        <Footer />
-      </div>
-    );
+    console.log('dbItems after delete ' , this.state.dbItems);
+    if(this.state.isViewItem){
+      return(
+        <div>
+          <Header />
+          <ViewSingleItem item={this.state.singleItem} />
+          <Footer />
+        </div>
+      )
+    }else{
+      return (
+        <div className='App'>
+          <Header />
+          <main className='center'>
+            <Switch>
+              <Route exact path='/searchform'
+                render={(props) => <EbaySearchForm
+                                      handleAddProduct={this.handleAddProduct}
+                                      handleSearchSubmit={this.handleSearchSubmit}
+                                      products={this.state.products}
+                                      handleInputSearchOnChange={this.handleInputSearchOnChange}
+                                      inputSearchValue={this.state.inputSearchValue}
+                                      wantedItem={this.state.wantedItem}/> }
+              />
+              <Route exact path='/wishlist'
+                render={(props) => <WishList
+                                      data={this.state.dbItems}
+                                      handleViewItem={this.handleViewItem}
+                                      handleItemDelete={this.handleItemDelete}
+                                      handleItemEdit={this.handleItemEdit}
+                                    />}
+              />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/' component={Home} />
+              <Redirect to='/' />
+            </Switch>
+          </main>
+          <Footer />
+        </div>
+      );
+    };
   }
 }
 

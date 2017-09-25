@@ -5,23 +5,19 @@ class WishList extends Component {
   render() {
     return (
       <div>
-        <div>
-          <div>
-            <table>
-              {this.props.data.map((product) => {
-                return(
-                  <WishItem
-                    product={product}
-                    key={product.id}
-                    handleViewItem={this.props.handleViewItem}
-                    handleItemDelete={this.props.handleItemDelete}
-                    handleItemEdit={this.porps.handleItemEdit}
-                  />
-                )})
-              }
-            </table>
-          </div>
-        </div>
+        <table>
+          {this.props.data.map((product) => {
+            return(
+              <WishItem
+                product={product}
+                key={product.id}
+                handleViewItem={this.props.handleViewItem}
+                handleItemDelete={this.props.handleItemDelete}
+                handleItemEdit={this.props.handleItemEdit}
+              />
+            )})
+          }
+        </table>
       </div>
     )
   }

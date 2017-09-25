@@ -1,7 +1,7 @@
 nav {
   display: inline-block;
   position: relative;
-  left: 40%;
+  left: 25%;
 }
 nav ul {
   list-style: none;
@@ -20,6 +20,12 @@ nav ul li a {
 
 table {
   width: 75%;
+  margin: 25px auto;
+}
+
+input.singleDescription {
+  display: block;
+  width: 50%;
   margin: 25px auto;
 }
 
