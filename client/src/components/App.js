@@ -28,11 +28,10 @@ class App extends Component {
     this.handleItemAdding          = this.handleItemAdding.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
     this.handleViewItem            = this.handleViewItem.bind(this);
+    this.handleItemDelete          = this.handleItemDelete.bind(this);
   }
 
   componentDidMount() {
-
-
     axios('http://localhost:3000/api/rotas')
       .then(res => {
         this.setState(prevState => {
@@ -86,14 +85,18 @@ class App extends Component {
       console.log(this.state.dbItems)
    };
 
-  handleItemDelete(event) {
-    var id=90;
+  handleItemDelete(id) {
     event.preventDefault();
-    axios.delete(`http://localhost:3000/api/rotas/${id}`).then((res) => {
-    console.log(res)
-    //udate state5
-    this.setState({dbItems: this.state.dbItems})
-    })
+    axios.delete(`http://localhost:3000/api/rotas/${id}`)
+    .then((res) => {
+      console.log(res)
+      //udate state5
+      this.setState((prevState) => {
+        return{
+          dbItems: this.state.dbItems
+        }
+      });
+    }).catch(err => console.log(err));
   }
 
   // method to add item
@@ -156,6 +159,7 @@ class App extends Component {
               render={(props) => <WishList
                                     data={this.state.dbItems}
                                     handleViewItem={this.handleViewItem}
+                                    handleItemDelete={this.handleItemDelete}
                                   />}
             />
             <Route exact path='/' component={Home} />

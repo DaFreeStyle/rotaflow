@@ -14,6 +14,7 @@ class WishList extends Component {
                     product={product}
                     key={product.id}
                     handleViewItem={this.props.handleViewItem}
+                    handleItemDelete={this.props.handleItemDelete}
                   />
                 )})
               }
