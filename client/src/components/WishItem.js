@@ -18,6 +18,11 @@ class WishItem extends Component {
           </td>
           <td>
             <button
+              onClick={(id) => {this.props.handleItemEdit(this.props.product.id)}}
+            >Edit</button>
+          </td>
+          <td>
+            <button
               onClick={(id) => {this.props.handleItemDelete(this.props.product.id)}}
             >Delete</button>
           </td>

@@ -39,8 +39,6 @@ class App extends Component {
         this.setState(prevState => {
           return {
             dbItems: res.data.data.rotaflows,
-            isViewItem: false,
-            singleItem: res,
           }
       });
     });
@@ -132,13 +130,26 @@ class App extends Component {
       console.log('handleViewItem', res);
       this.setState({
           isViewItem: true,
-          singleItem: res.data,
+          singleItem: res.data.data.rotaflow,
         })
     }).catch(err => console.log(err));
     console.log('isViewItem in handleViewItem ', this.state.isViewItem);
     if (this.state.isViewItem) {
       return <ViewSingleItem />
     }
+  }
+
+  handleItemEdit(id) {
+    axios.post(`http://localhost:3000/api/rotas/${id}`)
+    .then((res) => {
+      console.log(res)
+      //udate state5
+      this.setState((prevState) => {
+        return{
+          dbItems: this.state.dbItems
+        }
+      });
+    }).catch(err => console.log(err));
   }
 
   render() {
