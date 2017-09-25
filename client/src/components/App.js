@@ -7,6 +7,8 @@ import Home           from './Home';
 import EbaySearchForm from './EbaySearchForm';
 import WishList       from './WishList';
 import ViewSingleItem from './ViewSingleItem';
+import Footer         from './Footer';
+import About          from './About';
 
 import './App.css';
 
@@ -144,7 +146,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <main>
+        <main className='center'>
           <Switch>
             <Route exact path='/searchForm'
               render={(props) => <EbaySearchForm
@@ -162,10 +164,12 @@ class App extends Component {
                                     handleItemDelete={this.handleItemDelete}
                                   />}
             />
+            <Route exact path='/about' component={About} />
             <Route exact path='/' component={Home} />
             <Redirect to='/' />
           </Switch>
         </main>
+        <Footer />
       </div>
     );
   }

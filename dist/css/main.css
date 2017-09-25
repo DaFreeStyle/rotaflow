@@ -1,4 +1,49 @@
-.App {
+nav {
+  display: inline-block;
+  margin-left: 50%;
+}
+nav ul {
+  list-style: none;
+}
+
+nav ul li{
+  display: inline-block;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+table {
+  width: 75%;
+  margin: 25px auto;
+}
+
+input {
+  padding: 10px;
+  background-color: #fff;
+  border: .5px solid #ccc;
+  border-radius: 50px;
+  margin: 0 25px;
+  width: 150px;
+}
+
+button {
+  min-width: 71px;
+  padding: 10px;
+  background-color: #fff;
+  border: .5px solid #ccc;
+  border-radius: 50px;
+}
+
+button#submit {
+      margin-right: 25px;
+}
+
+.center {
   text-align: center;
 }
 
@@ -9,13 +54,31 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 100px;
   padding: 20px;
   color: white;
 }
 
+.App-footer {
+  background-color: #222;
+  padding: 10px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.App-footer h6 {
+  margin: 0;
+}
+
 .App-intro {
   font-size: large;
+}
+
+.Welcome {
+  margin: 10% 0;
+  font-size: 50px;
 }
 
 @keyframes App-logo-spin {

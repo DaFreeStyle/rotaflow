@@ -7,11 +7,13 @@ const Header = (prop) => {
     <div className="App">
       <div className="App-header">
         <img className="App-logo" alt="logo" />
-        <h2>Welcome to RotaFlow</h2>
         <nav>
           <ul>
-            <li><Link to='/searchForm'>Search Form</Link></li>
-            <li><Link to='/whishlist'>Your Wishlist</Link></li>
+            <li><Link to='/searchForm'><h2>Search Products</h2></Link></li>
+            <li>|</li>
+            <li><Link to='/whishlist'><h2>Your Wishlist</h2></Link></li>
+            <li>|</li>
+            <li><Link to='/about'><h2>About</h2></Link></li>
           </ul>
         </nav>
       </div>
