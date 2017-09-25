@@ -23,7 +23,7 @@ class ViewSingleItem extends Component {
                 </td>
                 <td>
                   <button
-                    onClick={(id) => {this.props.handleItemDelete(this.props.product.id)}}
+                    onClick={(id) => {this.props.handleItemDelete(product.id)}}
                   >Delete</button>
                 </td>
               </tr>

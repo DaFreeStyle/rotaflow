@@ -155,7 +155,7 @@ class App extends Component {
       return(
         <div>
           <Header />
-          <ViewSingleItem item={this.state.singleItem} />
+          <ViewSingleItem handleItemDelete={this.handleItemDelete} item={this.state.singleItem} />
           <Footer />
         </div>
       )
