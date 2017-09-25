@@ -54,7 +54,7 @@ class App extends Component {
   handleSearchSubmit(event) {
     event.preventDefault();
     let keywords = encodeURI(this.state.inputSearchValue);
-    let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=1';
+    let url = 'https://accesscontrolalloworiginall.herokuapp.com/http://svcs.ebay.com/services/search/FindingService/v1?SERVICE-NAME=FindingService&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.12.0&SECURITY-APPNAME=FelipeHe-RotaFlow-PRD-25d7504c4-6d3d6a4d&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&GLOBAL-ID=EBAY-US&keywords=' + keywords + '&paginationInput.entriesPerPage=25&paginationInput.entriesPerPage=10';
     axios(url)
     .then((res) => {
         this.setState(prevState => {
@@ -109,14 +109,15 @@ class App extends Component {
     this.setState({
       wantedItem: n,
     });
-    let self = this;
+
     axios.post('http://localhost:3000/api/rotas', {
       title: n.title,
       imgurl: n.imgurl,
       producturl: n.producturl,
     }).then(res => {
-      var newItem = self.state.wantedItem;
-      self.setState((prevState) => {
+      console.log("inside post ", res);
+      var newItem = res.data.data.data;
+      this.setState((prevState) => {
         return {
           dbItems: prevState.dbItems.concat(newItem),
         }
@@ -138,7 +139,7 @@ class App extends Component {
   handleItemEdit(id) {
     axios.post(`http://localhost:3000/api/rotas/${id}`)
     .then((res) => {
-      console.log(res)
+      //console.log(res)
       //udate state5
       this.setState((prevState) => {
         return{
@@ -182,6 +183,7 @@ class App extends Component {
                                       handleItemEdit={this.handleItemEdit}
                                     />}
               />
+              <Route exact path='/wishlist/:id' component={ViewSingleItem}/>
               <Route exact path='/about' component={About} />
               <Route exact path='/' component={Home} />
               <Redirect to='/' />

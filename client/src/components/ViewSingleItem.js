@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class ViewSingleItem extends Component {
   render() {
     return (
-      <div>
-        <h1>ViewSingleItem</h1>
+      <div className='center'>
+        <h1 className='search'>Your Item</h1>
         <table>
           <tbody>
           {this.props.item.map((product) => {
@@ -18,7 +18,7 @@ class ViewSingleItem extends Component {
                 </td>
                 <td>
                   <button
-                    onClick={(id) => {this.props.handleItemEdit(this.props.product.id)}}
+                    onClick={(id) => {this.props.handleItemEdit(product.id)}}
                   >Edit</button>
                 </td>
                 <td>

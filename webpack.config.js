@@ -20,7 +20,7 @@ if (!('NODE_ENV' in process.env)) require('dotenv').config();
 
 const config = {
   entry: {
-    main:   `${APP_DIR}/index.jsx`,
+    main:   `${APP_DIR}/index.js`,
     vendor: ['axios', 'react', 'react-dom', 'prop-types', 'react-router', 'react-router-dom', 'babel-regenerator-runtime'],
   },
   output: {

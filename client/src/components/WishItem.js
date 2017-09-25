@@ -23,7 +23,9 @@ class WishItem extends Component {
           </td>
           <td>
             <button
-              onClick={(id) => {this.props.handleItemDelete(this.props.product.id)}}
+              onClick={(id) => {
+                console.log(id, this.props.product.id)
+                this.props.handleItemDelete(this.props.product.id)}}
             >Delete</button>
           </td>
         </tr>

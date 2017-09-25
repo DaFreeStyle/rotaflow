@@ -7,6 +7,7 @@ class WishList extends Component {
       <div>
         <table>
           {this.props.data.map((product) => {
+            console.log(product)
             return(
               <WishItem
                 product={product}

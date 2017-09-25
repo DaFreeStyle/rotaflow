@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // THIS IS WHERE REACT WILL LIVE
 app.use(express.static(path.join(__dirname, 'dist')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
 
 // SET UP CORS
 app.use(cors());
@@ -33,6 +34,9 @@ app.use('/api/rotas', rotaflowRoutes);
 app.get('*', function(req, res) {
   res.status(404).send({message: 'Opps! Not found.'})
 });
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
 app.listen(PORT, function() {
   console.log(`listening on ${PORT}`);
