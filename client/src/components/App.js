@@ -173,6 +173,7 @@ class App extends Component {
                                     data={this.state.dbItems}
                                     handleViewItem={this.handleViewItem}
                                     handleItemDelete={this.handleItemDelete}
+                                    handleItemEdit={this.handleItemEdit}
                                   />}
             />
             <Route exact path='/about' component={About} />
