@@ -27,7 +27,6 @@ class App extends Component {
     this.handleSearchSubmit        = this.handleSearchSubmit.bind(this);
     this.handleInputSearchOnChange = this.handleInputSearchOnChange.bind(this);
     this.handleAddProduct          = this.handleAddProduct.bind(this);
-    //this.handleItemAdding          = this.handleItemAdding.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
     this.handleViewItem            = this.handleViewItem.bind(this);
     this.handleItemDelete          = this.handleItemDelete.bind(this);
@@ -62,28 +61,10 @@ class App extends Component {
             products: res.data.findItemsByKeywordsResponse[0].searchResult[0].item,
           }
         })
-        //console.log(this.state.products);
       }).catch((err) => {
           console.log(err);
       });
   }
-
-  // handleItemAdding(event) {
-  //   axios.post('http://localhost:3000/api/rotas', {
-  //     title: this.state.wantedItem.title,
-  //     imgurl: this.state.wantedItem.imgurl,
-  //     producturl: this.state.wantedItem.producturl
-  //   })
-  //   .then(res => {
-  //     var newItem=this.state.wantedItem;
-  //     this.setState((prevState) => {
-  //       return {
-  //         dbItems: prevState.dbItems.concat(newItem),
-  //       }
-  //     })
-  //   }).catch(err => console.log(err));
-  //     console.log(this.state.dbItems)
-  //  };
 
   handleItemDelete(id) {
     axios.delete(`http://localhost:3000/api/rotas/${id}`)
@@ -105,16 +86,13 @@ class App extends Component {
   // method to add item
   handleAddProduct(titleP, imgP, linkP) {
     console.log('here', titleP, imgP, linkP);
-    var n = {title:titleP, imgurl:imgP, producturl:linkP}
+    const itemToAdd = {title:titleP, imgurl:imgP, producturl:linkP}
     this.setState({
-      wantedItem: n,
+      wantedItem: itemToAdd,
     });
 
-    axios.post('http://localhost:3000/api/rotas', {
-      title: n.title,
-      imgurl: n.imgurl,
-      producturl: n.producturl,
-    }).then(res => {
+    axios.post('http://localhost:3000/api/rotas', itemToAdd)
+    .then(res => {
       console.log("inside post ", res);
       var newItem = res.data.data.data;
       this.setState((prevState) => {
