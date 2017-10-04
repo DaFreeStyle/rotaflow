@@ -4,27 +4,37 @@ const Rotaflow = {};
 
 Rotaflow.findAll = () => {
   return db.query(
-    `SELECT * FROM rotaflow`
+    `SELECT * FROM products`
   );
 };
 
 Rotaflow.findById = (id) => {
   return db.oneOrNone(
     `
-    SELECT * FROM rotaflow
+    SELECT * FROM products
     WHERE id = $1`,
     [id]
   );
 };
 
-Rotaflow.create = (rotaflow) => {
+Rotaflow.create = (product) => {
   return db.one(
     `
-    INSERT INTO rotaflow(table)   //What table key values you put in.
-    VALUES ($1, $2)
+    INSERT INTO products (title, imgurl, producturl)
+    VALUES ($1, $2, $3)
     RETURNING *`,
-    [rotoflow.rotoflow, rotoflow.brand]
+    [product.title, product.imgurl, product.producturl]
   );
 };
+
+
+Rotaflow.destroy = (id) => {
+  return db.none(`
+    DELETE FROM products
+    WHERE id = $1
+  `, [id]);
+}
+
+
 
 module.exports = Rotaflow;
